@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+eclipseClasspath.doFirst {
+    initSourceFolders()
+}
+
+def initSourceFolders() {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '2.53.1'
+}
+
+jar {
+  manifest {
+    attributes(
+       'Main-Class': 'com.vp.adpautomation.AppBootstrap'
+    )
+  }
+}
